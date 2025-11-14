@@ -1,0 +1,55 @@
+NonTerminal,Terminal,Production
+S,class,S -> Programa
+Programa,class,Programa -> 'class' ID '{' Main '}'
+Main,public,Main -> 'public' 'static' 'void' 'main' '(' 'String' '[' ']' ID ')' Bloque
+Bloque,{,Bloque -> '{' Sentencias '}'
+Sentencias,int,Sentencias -> Sentencia Sentencias
+Sentencias,double,Sentencias -> Sentencia Sentencias
+Sentencias,float,Sentencias -> Sentencia Sentencias
+Sentencias,String,Sentencias -> Sentencia Sentencias
+Sentencias,Scanner,Sentencias -> Sentencia Sentencias
+Sentencias,System,Sentencias -> Sentencia Sentencias
+Sentencias,(,Sentencias -> Sentencia Sentencias
+Sentencias,ID,Sentencias -> Sentencia Sentencias
+Sentencias,NUM,Sentencias -> Sentencia Sentencias
+Sentencias,+,Sentencias -> Sentencia Sentencias
+Sentencias,-,Sentencias -> Sentencia Sentencias
+Sentencias,},Sentencias -> ε
+Declaracion,int,Declaracion -> Tipo ID
+Declaracion,double,Declaracion -> Tipo ID
+Declaracion,float,Declaracion -> Tipo ID
+Declaracion,String,Declaracion -> Tipo ID
+Tipo,int,Tipo -> 'int'
+Tipo,double,Tipo -> 'double'
+Tipo,float,Tipo -> 'float'
+Tipo,String,Tipo -> 'String'
+Asignacion,ID,Asignacion -> ID '=' Expr
+Lectura,Scanner,Lectura -> 'Scanner' ID '=' 'new' 'Scanner' '(' 'System' '.' 'in' ')'
+Lectura,ID,Lectura -> ID '=' ID '.' 'nextInt' '(' ')'
+Escritura,System,Escritura -> 'System' '.' 'out' '.' 'println' '(' ExprList ')'
+Expr,(,Expr -> Term Expr'
+Expr,ID,Expr -> Term Expr'
+Expr,NUM,Expr -> Term Expr'
+Expr,+,Expr -> Term Expr'
+Expr,-,Expr -> Term Expr'
+Expr',+,Expr' -> '+' Term Expr'
+Expr',-,Expr' -> '-' Term Expr'
+Expr',),Expr' -> ε
+Expr',;,Expr' -> ε
+Term,(,Term -> Factor Term'
+Term,ID,Term -> Factor Term'
+Term,NUM,Term -> Factor Term'
+Term,+,Term -> Factor Term'
+Term,-,Term -> Factor Term'
+Term',*,Term' -> '*' Factor Term'
+Term',/,Term' -> '/' Factor Term'
+Term',%,Term' -> '%' Factor Term'
+Term',+,Term' -> ε
+Term',-,Term' -> ε
+Term',),Term' -> ε
+Term',;,Term' -> ε
+Factor,(,Factor -> '(' Expr ')'
+Factor,ID,Factor -> ID
+Factor,NUM,Factor -> NUM
+Factor,-,Factor -> '-' Factor
+Factor,+,Factor -> '+' Factor

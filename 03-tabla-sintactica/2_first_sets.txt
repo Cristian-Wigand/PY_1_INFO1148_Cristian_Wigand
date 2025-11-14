@@ -1,0 +1,31 @@
+Conjunto FIRST (basado en la gramática sin recursión izquierda)
+
+Terminales considerados: class, public, static, void, main, String, [, ], (, ), {, }, ;, =, new, Scanner, System, ., in, nextInt, out, println, ',', +, -, *, /, %, (, ) , ID, NUM, int, double, float, String
+
+FIRST(Programa) = {'class'}
+FIRST(Main) = {'public'}
+FIRST(Bloque) = {'{'}
+FIRST(Sentencias) = { first(Sentencia), ε } -> dependerá de FIRST(Sentencia)
+FIRST(Sentencia) = FIRST(Declaracion) ∪ FIRST(Asignacion) ∪ FIRST(Lectura) ∪ FIRST(Escritura) ∪ FIRST(Expr)
+  FIRST(Declaracion) = { 'int', 'double', 'float', 'String' }
+  FIRST(Asignacion) = { ID }
+  FIRST(Lectura) = { 'Scanner', ID }  # ambigüedad: inicio 'Scanner' o ID (uso de nextInt)
+  FIRST(Escritura) = { 'System' }
+  FIRST(Expr) = FIRST(Term) = FIRST(Factor)
+    FIRST(Factor) = {'(', ID, NUM, '-', '+'}
+
+Por lo tanto (resumen principal):
+FIRST(S) = {'class'}
+FIRST(Programa) = {'class'}
+FIRST(Main) = {'public'}
+FIRST(Bloque) = {'{'}
+FIRST(Sentencias) = {'int','double','float','String','Scanner','System','(', 'ID','NUM','-','+', ε}
+FIRST(Declaracion) = {'int','double','float','String'}
+FIRST(Asignacion) = {'ID'}
+FIRST(Lectura) = {'Scanner','ID'}
+FIRST(Escritura) = {'System'}
+FIRST(Expr) = {'(', 'ID', 'NUM', '-', '+'}
+FIRST(Term) = {'(', 'ID', 'NUM', '-', '+'}
+FIRST(Factor) = {'(', 'ID', 'NUM', '-', '+'}
+
+Observación: Para producción exacta se requiere el conjunto FOLLOW y manejo de ambigüedades (por ejemplo Lectura que empieza con ID o Scanner). 
