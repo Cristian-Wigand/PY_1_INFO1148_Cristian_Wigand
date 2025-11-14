@@ -1,0 +1,29 @@
+Gramática sin recursión izquierda (eliminada recursión directa para Expr y Term)
+
+Reglas transformadas usando la técnica clásica (A -> A α | β  => A -> β A' ; A' -> α A' | ε)
+
+1. S -> Programa
+2. Programa -> 'class' ID '{' Main '}'
+3. Main -> 'public' 'static' 'void' 'main' '(' 'String' '[' ']' ID ')' Bloque
+4. Bloque -> '{' Sentencias '}'
+5. Sentencias -> Sentencia Sentencias | ε
+6. Sentencia -> Declaracion ';' 
+              | Asignacion ';'
+              | Lectura ';'
+              | Escritura ';'
+              | Expr ';'
+7. Declaracion -> Tipo ID
+8. Tipo -> 'int' | 'double' | 'float' | 'String'
+9. Asignacion -> ID '=' Expr
+10. Lectura -> 'Scanner' ID '=' 'new' 'Scanner' '(' 'System' '.' 'in' ')' 
+              | ID '=' ID '.' 'nextInt' '(' ')' 
+11. Escritura -> 'System' '.' 'out' '.' 'println' '(' ExprList ')'
+12. Expr -> Term Expr'
+13. Expr' -> '+' Term Expr' | '-' Term Expr' | ε
+14. Term -> Factor Term'
+15. Term' -> '*' Factor Term' | '/' Factor Term' | '%' Factor Term' | ε
+16. Factor -> '(' Expr ')' 
+           | ID 
+           | NUM
+           | '-' Factor
+           | '+' Factor

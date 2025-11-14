@@ -1,0 +1,36 @@
+G(L) - Gramática inicial (expresiones aritméticas + lectura e impresión en Java)
+
+1. S -> Programa
+2. Programa -> 'class' ID '{' Main '}'
+3. Main -> 'public' 'static' 'void' 'main' '(' 'String' '[' ']' ID ')' Bloque
+4. Bloque -> '{' Sentencias '}'
+5. Sentencias -> Sentencia Sentencias | ε
+6. Sentencia -> Declaracion ';' 
+              | Asignacion ';'
+              | Lectura ';'
+              | Escritura ';'
+              | Expr ';'
+7. Declaracion -> Tipo ID
+8. Tipo -> 'int' | 'double' | 'float' | 'String'
+9. Asignacion -> ID '=' Expr
+10. Lectura -> 'Scanner' ID '=' 'new' 'Scanner' '(' 'System' '.' 'in' ')' 
+              | ID '=' ID '.' 'nextInt' '(' ')' 
+11. Escritura -> 'System' '.' 'out' '.' 'println' '(' ExprList ')'
+12. ExprList -> Expr (',' Expr)* | ε
+13. Expr -> Expr '+' Term
+         | Expr '-' Term
+         | Term
+14. Term -> Term '*' Factor
+         | Term '/' Factor
+         | Term '%' Factor
+         | Factor
+15. Factor -> '(' Expr ')' 
+           | ID 
+           | NUM
+           | '-' Factor
+           | '+' Factor
+
+NOTAS:
+- ID representa identificadores válidos en Java.
+- NUM representa literales numéricas (enteros o reales).
+- Esta gramática contiene recursión izquierda en Expr y Term (recursión directa).
